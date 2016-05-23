@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="/css/docs.css">
+  <link rel="stylesheet" type="text/css" href="/css/glitch.css">
+</head>
+<body>
+
+
+  <body>
+    <main>
+        <header class="lede">
+  <div class="art scanlines">
+    <img src="/img/boxart-header.png">
+  </div>
+  <div class="title">
+    <div class="title-copy">
+      <h1 class="hed"><a href="/">Boxart</a></h1>
+      <p class="vers"><span class="a11y-only">Version</span>0.0.1</p>
+      <p class="subhed">JavaScript<br>System</p>
+    </div>
+  </div>
+  <a class="seal" href="https://bocoup.com"><img src="/img/bocoup-seal-sm.png" alt="Original Bocoup Seal of Quality"></a>
+</header>
+<nav class="nav-blocks">
+
+  
+    <a  href="/roadmap/">BoxArt Roadmap</a>
+  
+
+  
+
+  
+    <a class="active" href="/animation/">Animation</a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <a  href="/layouts/">Layout Helpers</a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <a  href="/ui/">UI Helpers</a>
+  
+
+</nav>
+
+
+        <div class="central">
+            
+            <h2 class="hed-a">Animation</h2>
+            
+            <p>BoxArt is a tool for building games in the DOM: Every object in your game, from cards to player avatars, is represented by a DOM element, and rendering is handled by the browser. This sets BoxArt apart from other graphical web game environments such as Canvas or WebGL. To simplify working with complex animations in this environment, BoxArt provides a set of React components and code structures to encapsulate, design and implement DOM animation.</p>
+
+<h3 id="dom-animation">DOM Animation</h3>
+
+<h4 id="animated-and-animated-agent">Animated and Animated Agent</h4>
+
+<p>BoxArt structures animation with two React components, <code class="highlighter-rouge">Animated</code> and <code class="highlighter-rouge">AnimatedAgent</code>. <code class="highlighter-rouge">Animated</code> is used to wrap an object in the document that is going to be animated, and to define how that object will move. <code class="highlighter-rouge">AnimatedAgent</code> wraps one or many <code class="highlighter-rouge">Animated</code> components and coordinates their animation. Both are necessary to define an animation:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">Animated</span><span class="p">,</span> <span class="nx">AnimatedAgent</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">'boxart'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">Animated</code> components have a required <code class="highlighter-rouge">animateKey</code> property, which is used by the parent <code class="highlighter-rouge">AnimatedAgent</code> to identify unique animations: no two <code class="highlighter-rouge">&lt;Animated&gt;</code> components within any one <code class="highlighter-rouge">&lt;AnimatedAgent&gt;</code> should use the same <code class="highlighter-rouge">animateKey</code>.</p>
+
+<p><code class="highlighter-rouge">Animated</code> can also take a <code class="highlighter-rouge">animate</code> property, which should be a function defining the desired animation. Animations can be as complex as you require, but one of the simplest kinds of motion is a linear transition; <code class="highlighter-rouge">Animated</code> will default to this if no <code class="highlighter-rouge">animate</code> function is provided.</p>
+
+<p>If on successive renders that element moves to different places in the DOM, the <code class="highlighter-rouge">AnimatedAgent</code> will use the <code class="highlighter-rouge">animateKey</code> property to identify the new position. Rather than moving the element to the new location through JavaScript (which would require the browser to re-draw the page many times, causing irregular, stuttery motion or “jank”), the AnimatedAgent is instead identified in its new location, transformed back to the original position through CSS transforms (which do not cause a reflow), and then animated into the desired final position via CSS.</p>
+
+<iframe src="../examples/animation-simple.html" class="somewhat-short"></iframe>
+<p><a href="#">View Fullscreen</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"board"</span><span class="nt">&gt;</span>
+class Main extends UpdateAncestor {
+
+  constructor() {
+    super();
+
+    this.state = {
+      pos: 'left'
+    };
+  }
+
+  swap() {
+    this.setState({
+      pos: this.state.pos === 'left' ? 'right' : 'left'
+    });
+  }
+
+  render() {
+    var pos1, pos2;
+    var animatedContent = (
+      <span class="nt">&lt;Animated</span> <span class="na">animateKey=</span><span class="s">"h1"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;&lt;strong&gt;</span>Animated Content<span class="nt">&lt;/strong&gt;&lt;/p&gt;</span>
+      <span class="nt">&lt;/Animated&gt;</span>
+    );
+
+    if (this.state.pos === 'right') {
+      pos1 = animatedContent;
+    } else {
+      pos2 = animatedContent;
+    }
+
+    return (
+      <span class="nt">&lt;AnimatedAgent&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"game-board"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;p&gt;</span>Click either container to swap the content from one to the other<span class="nt">&lt;/p&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"container"</span> <span class="na">id=</span><span class="s">"container1"</span> <span class="na">onClick=</span><span class="s">{this.swap}</span><span class="nt">&gt;</span>
+            {pos1}
+          <span class="nt">&lt;/div&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"container"</span> <span class="na">id=</span><span class="s">"container2"</span> <span class="na">onClick=</span><span class="s">{this.swap}</span><span class="nt">&gt;</span>
+            {pos2}
+          <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/AnimatedAgent&gt;</span>
+    );
+  }
+}
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+</div>
+
+<p>This can work with any number of elements, so long as they have unique <code class="highlighter-rouge">animateKey</code> attributes:</p>
+
+<iframe src="../examples/animation-simple-list.html" class="very-short"></iframe>
+<p><a href="#">View Fullscreen</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">class</span> <span class="nx">Main</span> <span class="kr">extends</span> <span class="nx">UpdateAncestor</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">numbers</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="nx">shuffle</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="c1">// Unreliable one-line array reverse &amp; shuffle</span>
+      <span class="na">numbers</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">reverse</span><span class="p">().</span><span class="nx">sort</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">?</span> <span class="o">-</span><span class="mi">1</span> <span class="p">:</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"game-board"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">AnimatedAgent</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+            <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">numbers</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">num</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+              <span class="o">&lt;</span><span class="nx">Animated</span>
+                <span class="nx">animateKey</span><span class="o">=</span><span class="p">{</span><span class="nx">num</span><span class="p">}</span>
+                <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">num</span><span class="p">}</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">num</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>              <span class="o">&lt;</span><span class="sr">/Animated</span><span class="err">&gt;
+</span>            <span class="p">)}</span>
+          <span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/AnimatedAgent</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h4 id="updateancestor">UpdateAncestor</h4>
+
+<p><code class="highlighter-rouge">Animated</code> and <code class="highlighter-rouge">AnimatedAgent</code> are exports of the <a href="http://github.com/boxart/boxart">boxart</a> package; the <code class="highlighter-rouge">UpdateAncestor</code> component used in the examples above is defined within <a href="http://github.com/boxart/boxart-boiler">boxart-boiler</a>. <code class="highlighter-rouge">UpdateAncestor</code> provides auto-binding and convenience methods for using <a href="https://facebook.github.io/react/docs/update.html">react-addons-update</a>, and can be used to wrap animated elements in order to simplify the process of re-rendering on update.</p>
+
+<p><code class="highlighter-rouge">UpdateAncestor</code> may be imported from <code class="highlighter-rouge">src/modules/update-ancestor</code>.</p>
+
+<h3 id="sprites">Sprites</h3>
+
+<p>Coming Soon!</p>
+
+        </div>
+    </main>
+
+    <footer class="page-foot">
+  <div class="closing">
+    <a href="#" class="js"><img src="/img/js.png"></a>
+  </div>
+</footer>
+
+
+  </body>
+
+</html>
