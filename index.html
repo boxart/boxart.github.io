@@ -1,266 +1,210 @@
-<!DOCTYPE html>
 <html>
-
-  <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title></title>
-  <link rel="stylesheet" type="text/css" href="/css/docs.css">
-  <link rel="stylesheet" type="text/css" href="/css/glitch.css">
-</head>
-<body>
-
-
-  <body>
-    <main>
-        <header class="lede">
-  <div class="art scanlines">
-    <img src="/img/boxart-header.png">
-  </div>
-  <div class="title">
-    <div class="title-copy">
-      <h1 class="hed"><a href="/">Boxart</a></h1>
-      <p class="vers"><span class="a11y-only">Version</span>0.0.1</p>
-      <p class="subhed">JavaScript<br>System</p>
-    </div>
-  </div>
-  <a class="seal" href="https://bocoup.com"><img src="/img/bocoup-seal-sm.png" alt="Original Bocoup Seal of Quality"></a>
-</header>
-<nav class="nav-blocks">
-
-  
-    <a  href="/roadmap/">BoxArt Roadmap</a>
-  
-
-  
-
-  
-    <a  href="/animation/">Animation</a>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <a  href="/layouts/">Layout Helpers</a>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <a  href="/ui/">UI Helpers</a>
-  
-
-</nav>
-
-
-        <div class="central">
-            
-            
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  <div class="intro">
-    <p><a href="https://github.com/boxart/boxart">BoxArt</a> and <a href="https://github.com/boxart/boxart-boiler">BoxArt-Boiler</a> are tools for building fast, modern, and responsive HTML web games.</p>
-
-<p>The HTML Document Object Model and its accompanying CSS box model lend themselves to responsive 2D-casual game board layouts. The highly-tuned HTML render flows of our browsers are more battery safe than canvas or WebGL alternatives, while also providing opportunities for graphics acceleration and performance. With boxart-boiler games, the idea is to build DOM-first. If you want to drop down into lower level drawing APIs, you can always temporarily rasterize and enhance an element outside of boxart.</p>
-
-<p>Moreover, HTML gives us a way to represent whatever information we mean to convey visually, no matter how complex, in a way that assistive technologies can tap into. This is how we can make truly <em>open</em> Open Web Games.</p>
-
-<h3 id="contributing-bug-reports-and-more-information">Contributing, Bug Reports, and More Information</h3>
-
-<p>BoxArt is being developed in the open, so you can see and get involved in our planning process at <a href="https://waffle.io/boxart/boxart-boiler">waffle.io/boxart/boxart-boiler</a>. To file a bug report, <a href="https://github.com/boxart/boxart-boiler/issues">open an issue on the BoxArt-Boiler Github repository</a> and it will be automatically added to our Waffle board.</p>
-
-  </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-  
-
-  
-    
-      <h2 class="hed-a">Getting Started with Boxart</h2>
-    
-    <p>To start working with this repo and build your own responsive, accessible game we recommend you either download the code for the latest release from the <a href="https://github.com/boxart/boxart-boiler/releases">releases</a> page, or fork this repo and use git to clone your fork.</p>
-
-<p>Once the code is on your machine open a terminal in its directory and run <code class="highlighter-rouge">npm install</code>; this will install all our dependencies and you’ll be able to run the project’s grunt tasks. To see the site hosted locally run <code class="highlighter-rouge">grunt</code> and visit <a href="http://localhost:8080">http://localhost:8080</a> in your browser of choice.</p>
-
-<h2 id="demo-branches">Demo Branches</h2>
-
-<p>For your own games, we recommend starting with <a href="https://github.com/boxart/boxart-boiler">the <code class="highlighter-rouge">master</code> branch</a> and build from there. But if you want a working example of how BoxArt can be used, these branches contain demo games that you can download and run to see how different types of game logic and animation can be implemented:</p>
-
-<ul>
-  <li><a href="https://github.com/boxart/boxart-boiler/tree/simple-demo">simple-demo</a>: A demo matching game demonstrating BoxArt’s batched custom animation support</li>
-  <li><a href="https://github.com/boxart/boxart-boiler/tree/box2d-demo">box2d-demo</a>: A demo showing how BoxArt can be used in conjunction with <a href="http://box2d.org/">Box2D</a></li>
-  <li><a href="https://github.com/boxart/boxart-boiler/tree/2048-demo">2048-demo</a>: A BoxArt implementation of the addictive sliding number game</li>
-</ul>
-
-<h2 id="system-dependencies">System Dependencies</h2>
-
-<p>In order to use or contribute to this repo you’ll need the following things installed on your system:</p>
-
-<ul>
-  <li><a href="https://nodejs.org/en/download/">NodeJS/NPM</a></li>
-  <li><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git</a></li>
-  <li><a href="http://gruntjs.com/getting-started">Grunt-CLI</a> <code class="highlighter-rouge">npm install -g grunt-cli</code></li>
-</ul>
-
-<h2 id="build-tasks">Build Tasks</h2>
-
-<p>The following tasks are provided by this boilerplate for use during development.</p>
-
-<h3 id="default">default</h3>
-<p><code class="highlighter-rouge">grunt</code> or <code class="highlighter-rouge">npm start</code></p>
-
-<p>The default <code class="highlighter-rouge">grunt</code> task (aliased to <code class="highlighter-rouge">npm start</code>) runs <code class="highlighter-rouge">webpack-dev-server</code>; a task which hosts your site on a local http server and watches your code for changes. When changes are detected webpack will automatically cut a new build and the code (where possible) will be automatically swapped into the browser, meaning you don’t have to refresh the page to see updates. If the code cannot be hotswapped the page will be refreshed so the latest changes are visible. The <code class="highlighter-rouge">webpack-dev-server</code> task is configured in the <code class="highlighter-rouge">grunt-webpack.js</code> file in the <a href="https://github.com/boxart/boxart-boiler/tree/master/tasks">tasks directory</a>, and is setup to read the <code class="highlighter-rouge">webpack.config.js</code> file to configure webpack’s behavior.</p>
-
-<h3 id="lint">Lint</h3>
-<p><code class="highlighter-rouge">grunt lint</code> or <code class="highlighter-rouge">npm run lint</code></p>
-
-<p>This repo uses <a href="http://eslint.org">eslint</a> to enforce code quality and a consistent style across the project. Running <code class="highlighter-rouge">grunt lint</code> (aliased to <code class="highlighter-rouge">npm run lint</code>) will notify you of any possible JS errors or style variations. This task is configured with numerous <code class="highlighter-rouge">.eslintrc</code> files that are scattered throughout the repo. Note that none of those files actually define linting rules, instead they reference predefined rule sets which live in the <a href="https://github.com/boxart/boxart-boiler/tree/master/eslint">eslint directory</a>.</p>
-
-<p>An <code class="highlighter-rouge">.editorconfig</code> file is also provided to help reduce frustrating style 
-errors that could bog down this linting task. If your text editor or IDE 
-supports it, install an <a href="http://editorconfig.org/#download">editor config plugin</a>.</p>
-
-<h3 id="test">Test</h3>
-<p><code class="highlighter-rouge">grunt test</code> or <code class="highlighter-rouge">npm test</code></p>
-
-<p>The <code class="highlighter-rouge">grunt test</code> task (aliased to <code class="highlighter-rouge">npm test</code>) first lints the code, then runs our tests using the <a href="https://karma-runner.github.io/0.13/index.html">karma test runner</a>. This task runs the test suite once, then exits; this mirrors what happens in our <a href="https://travis-ci.com">continuous integration environment</a>.</p>
-
-<p>Testing in JS typically involves lots of moving parts, and this project is no  exception: tests leverage the <a href="https://mochajs.org/">Mocha Testing Framework</a>, and the <a href="http://chaijs.com/">Chai Assertion Library</a>.</p>
-
-<p>To <em>skip</em> linting and run only the tests themselves, use the command <code class="highlighter-rouge">grunt karma:ci</code> instead.</p>
-
-<h3 id="test-dev">Test-Dev</h3>
-<p><code class="highlighter-rouge">grunt test-dev</code> or <code class="highlighter-rouge">npm run test-dev</code></p>
-
-<p>The <code class="highlighter-rouge">grunt test-dev</code> task (aliased to <code class="highlighter-rouge">npm run test-dev</code>) first lints the code, then starts the tests in a watcher that will re-run tests when code changes are detected. This task is designed to be run in the background while coding, to help catch errors as they occur.</p>
-
-<h3 id="build">Build</h3>
-<p><code class="highlighter-rouge">grunt build</code> or <code class="highlighter-rouge">npm run build</code></p>
-
-<p>The <code class="highlighter-rouge">grunt build</code> task (aliased to <code class="highlighter-rouge">npm run build</code>) uses <a href="https://webpack.github.io/">Webpack</a> to bundle our code for release for a dev  environment. Before building the code this task runs both the <code class="highlighter-rouge">lint</code> and  <code class="highlighter-rouge">karma:ci</code> tasks, to ensure code quality. The <code class="highlighter-rouge">webpack.config.build.js</code> file is used to configure webpack’s behavior during this task.</p>
-
-<p>Built files are output into the <code class="highlighter-rouge">dist/</code> directory.</p>
-
-<h2 id="documentation">Documentation</h2>
-
-<p>The BoxArt-Boiler source contains a number of useful inline comments embedded within the code, but this repository also includes user documentation for all available BoxArt &amp; BoxArt-Boiler features. This documentation is contained within the <a href="https://github.com/boxart/boxart-boiler/tree/master/docs-src">docs-src directory</a>, and can be rendered and viewed using the commands below.</p>
-
-<h3 id="generate-docs">Generate Docs</h3>
-<p><code class="highlighter-rouge">grunt docs</code> or <code class="highlighter-rouge">npm run docs</code></p>
-
-<p>The <code class="highlighter-rouge">grunt docs</code> command (aliased to <code class="highlighter-rouge">npm run docs</code>) will compile the live inline code example files, then use Jekyll to build the documentation site from the <a href="https://github.com/boxart/boxart-boiler/tree/master/docs-src">docs-src directory</a> into the <code class="highlighter-rouge">docs/</code> folder. Once built, a web server will be available on http://localhost:4000/ : the documentation site can be viewed at this address, and the HTML documentation will automatically be re-generated if any of the source markdown files change. (Note however that this server does not include live reload, so you will need to manually refresh your browser window to see those changes.)</p>
-
-<h3 id="developing-inline-examples">Developing Inline Examples</h3>
-<p><code class="highlighter-rouge">npm run docs-dev</code></p>
-
-<p>Code for the live inline (iframed) examples within the documentation is contained within the <code class="highlighter-rouge">examples/</code> folder in the repository root. Running <code class="highlighter-rouge">npm run docs-dev</code> will start the Jekyll site as with <code class="highlighter-rouge">grunt docs</code>, but will start a webpack build <em>in parallel</em> so that any changes to the examples source code will be compiled into the docs-src folder, and then picked up by the Jekyll watcher and rendered into the live docs site. This one command has the same effect as running <code class="highlighter-rouge">grunt jekyll</code> and <code class="highlighter-rouge">grunt build-examples-dev</code> in two separate terminals.</p>
-
-<h2 id="tech-stack-and-tool-chain">Tech Stack and Tool Chain</h2>
-
-<p>This project makes liberal use of the following technologies:</p>
-
-<ul>
-  <li><a href="https://babeljs.io/docs/learn-es2015/">ES2015</a></li>
-  <li><a href="http://www.createjs.com/soundjs">SoundJS</a></li>
-  <li><a href="https://facebook.github.io/react/">React</a></li>
-  <li><a href="https://webpack.github.io/">Webpack</a></li>
-  <li><a href="http://stylus-lang.com/">Stylus</a></li>
-  <li><a href="https://github.com/postcss/autoprefixer">Autoprefixer</a></li>
-</ul>
-
-<p>Cross-Browser Testing generously provided by</p>
-
-<p><a href="https://www.browserstack.com"><img src="img/browserstack_logo.png" alt="BrowserStack" /></a></p>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-        </div>
-    </main>
-
-    <footer class="page-foot">
-  <div class="closing">
-    <a href="#" class="js"><img src="/img/js.png"></a>
-  </div>
-</footer>
-
-
-  </body>
-
+<head><link href="main.css" rel="stylesheet"></head>
+<body><div><div><h1>BoxArt</h1>
+<p><a href="refs/">API Documentation</a></p>
+<h2>Usage</h2>
+<p>BoxArt is a state-ful animate-on-class-change library. It starts an animation when an element it is watching changes its class list. BoxArt currently animates html elements by listening to mutation observer events, React's virtual dom, or Preact's virtual dom.</p>
+<h4>DOM Usage:</h4>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> animations = {
+  <span class="hljs-string">'animatedType'</span>: {
+    <span class="hljs-attr">default</span>: <span class="hljs-comment">// ...</span>
+  },
+};
+
+<span class="hljs-keyword">new</span> BoxArtMutation({animations})
+.observe(<span class="hljs-built_in">document</span>.body);
+</code></pre>
+<p class="full"><a class="jsbin-embed" href="https://jsbin.com/bobidus/embed?js,output">JS Bin on jsbin.com</a></p>
+<h4>React/Preact usage:</h4>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">BoxArt</span> <span class="hljs-attr">animations</span>=<span class="hljs-string">{animations}</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">BoxArt</span>&gt;</span>
+</code></pre>
+<p class="full"><a class="jsbin-embed" href="https://jsbin.com/hireyac/embed?js,output">JS Bin on jsbin.com</a></p>
+<script src="https://static.jsbin.com/js/embed.min.js?4.1.4"></script>
+</div><div><h2>Classful Animations</h2>
+<p>BoxArt animations respond to changes in an animated element's location in the DOM, not spatial position, or its class list. Animating elements are identified by up to 3 names in their class list. The three names are the animation <code>type</code>, the element's <code>id</code>, and the current <code>animation</code>. The <code>type</code> determines what <code>animation</code>s are available to a given element. At minimum an element can animate with only the <code>type</code> in its class list. The <code>id</code> defaults to the <code>type</code>. Other <code>id</code>s are the <code>type</code> with any suffix. <code>animation</code> defaults to <code>default</code>.</p>
+<p>An animation is run with three state objects, a beginning state, an end state, and a modifiable state. An animation works by updating these states from the DOM or javascript values, animating the modifiable state between the begin and end states, and presenting the modifiable state on the element and its children. The animating element's <code>id</code> indicates what set of states with that element. This lets elements move in the DOM's hierarchy or for a new element to reuse an old element's state.</p>
+</div><div><h2>Animation Functions</h2>
+<p>BoxArt provides a family of functions as shorthand for creating its animation functions. They fall into three families: <code>update</code>, <code>animate</code>, and <code>present</code>.</p>
+<p>As mentioned <code>update</code> functions update the state objects BoxArt uses. <code>animate</code> functions animate a third state object between the first two. <code>present</code> functions present the third state on the animated element.</p>
+<p><a name="update"><a href="#update"></p>
+<h3>update</h3>
+<p></a></a></p>
+<pre><code class="language-js">update: update.rect().asElement(update.object({
+  <span class="hljs-attr">left</span>: update.property(<span class="hljs-string">'left'</span>),
+  <span class="hljs-attr">top</span>: update.property(<span class="hljs-string">'top'</span>),
+})),
+</code></pre>
+<p>BoxArt's function shorthand allows for some chaining but this can also be written:</p>
+<pre><code class="language-js">update: update.asElement(update.rect(), update.object({
+  <span class="hljs-attr">left</span>: update.property(<span class="hljs-string">'left'</span>),
+  <span class="hljs-attr">top</span>: update.property(<span class="hljs-string">'top'</span>),
+})),
+</code></pre>
+<p>Lets break down what this function is doing.</p>
+<p>The returned function takes three arguments <code>state</code>, <code>element</code>, and <code>data</code> and returns its final <code>state</code>.</p>
+<p>Written out the above might look like:</p>
+<pre><code class="language-js">update: (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">state, element, data</span>) </span>{
+    element = element.getBoundingClientRect();
+    state = state || {};
+    state.left = element.left;
+    state.top = element.top;
+    <span class="hljs-keyword">return</span> state;
+  };
+}()),
+</code></pre>
+<p>This function is using the element's client rectangle to build a left and top state. In addition to the main function, update has a few helper functions <code>copy</code>, <code>merge</code> and <code>should</code>. <code>copy</code> and <code>merge</code> are used to update the animation states without querying the element when it isn't necessary or desired. <code>should</code> if given shortcuts animations if it returns false.</p>
+<p>Our update written with its helpers would be:</p>
+<pre><code class="language-js">update: (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> func = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">state, element, data</span>) </span>{
+    element = element.getBoundingClientRect();
+    state = state || {};
+    state.left = element.left;
+    state.top = element.top;
+    <span class="hljs-keyword">return</span> state;
+  };
+  func.copy = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">dest, src</span>) </span>{
+    dest = dest || {};
+    dest.left = src.left;
+    dest.top = src.top;
+    <span class="hljs-keyword">return</span> dest;
+  };
+  <span class="hljs-comment">// This example creates a merge that is the same as copy.</span>
+  func.merge = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">dest, src</span>) </span>{
+    dest = dest || {};
+    dest.left = src.left;
+    dest.top = src.top;
+    <span class="hljs-keyword">return</span> dest;
+  };
+  <span class="hljs-comment">// This example normally does not have a should but here is a barebones</span>
+  <span class="hljs-comment">// example.</span>
+  func.should = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">stateA, stateB</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  };
+  <span class="hljs-keyword">return</span> func;
+}()),
+</code></pre>
+<h3>animate</h3>
+<pre><code class="language-js">animate: animate.object({
+  <span class="hljs-attr">left</span>: animate.begin().to(animate.end()),
+  <span class="hljs-attr">top</span>: animate.top().to(animate.end()),
+}),
+</code></pre>
+<p><code>animate</code> functions like <code>update</code>'s may chain. This function expands to:</p>
+<pre><code class="language-js">animate: animate.object({
+  <span class="hljs-attr">left</span>: animate.to(animate.begin(), animate.end()),
+  <span class="hljs-attr">top</span>: animate.to(animate.begin(), animate.end()),
+}),
+</code></pre>
+<p><code>animate</code> functions slightly break a rule in the order of arguments to BoxArt animation functions. The first argument in most BoxArt functions is the destination for values. Animation functions instead pass a time value <code>t</code>. <code>t</code> starts as the number of seconds since the start of the animation but normally is transformed by easing functions into a value between 0 and 1. The other arguments are <code>state</code>, <code>begin</code>, <code>end</code> and <code>data</code>.</p>
+<p>With its <code>done</code> helper function that by its namesake determines when the animation is done, the example <code>animate</code> function handwritten may look like:</p>
+<pre><code class="language-js">animate: (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> func = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">t, state, begin, end, data</span>) </span>{
+    state.left = (end.left - begin.left) * t + begin.left;
+    state.top = (end.top - begin.top) * t + begin.top;
+  };
+  func.done = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">t</span>) </span>{
+    <span class="hljs-keyword">return</span> t &gt;= <span class="hljs-number">1</span>;
+  };
+  <span class="hljs-keyword">return</span> func;
+}()),
+</code></pre>
+<h3>present</h3>
+<p><code>update</code> and <code>animate</code> functions share their shape around the defined data structure for an animation. <code>present</code> will use that data structure to change how the animated element is presented.</p>
+<pre><code class="language-js">present: present.style({
+  <span class="hljs-attr">transform</span>: present.translate([
+    present.key(<span class="hljs-string">'left'</span>).to(present.end).px(),
+    present.key(<span class="hljs-string">'top'</span>).to(present.end).px(),
+  ]),
+}),
+</code></pre>
+<p><code>present</code> functions commonly expand more than <code>update</code> and <code>animate</code>.</p>
+<pre><code class="language-js">present: present.style({
+  <span class="hljs-attr">transform</span>: present.translate([
+    present.px(present.sub(present.key(<span class="hljs-string">'left'</span>), present.end(present.key(<span class="hljs-string">'left'</span>)))),
+    present.px(present.sub(present.key(<span class="hljs-string">'top'</span>), present.end(present.key(<span class="hljs-string">'top'</span>)))),
+  ]),
+}),
+</code></pre>
+<p>This <code>present</code> function is creating a difference on the <code>left</code> and <code>top</code> keys so that the transform is relative to where the element should current render.</p>
+<p>Since <code>present</code> functions may overwrite the current presentation of an element, the helpers create some functions used to <code>store</code> and <code>restore</code> the original values that may be overwritten. Together these functions follow <code>update</code>'s argument layout where the value being modified is the first.</p>
+<p><code>present</code> takes 3 arguments: <code>element</code>, <code>state</code>, and <code>data</code>. Our example might look like:</p>
+<pre><code class="language-js">present: (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">element, state, data</span>) </span>{
+    <span class="hljs-keyword">const</span> end = data.end;
+    element.style.transform =
+      <span class="hljs-string">`translate(<span class="hljs-subst">${state.left - end.left}</span>px, <span class="hljs-subst">${state.top - end.top}</span>px)`</span>;
+  };
+}()),
+</code></pre>
+<p><code>store</code> like <code>update</code> initializes and stores its target data with arguments <code>store</code>, <code>element</code>, and <code>data</code>. <code>restore</code> swaps the first two arguments and takes <code>element</code>, <code>store</code>, and <code>data</code>.</p>
+<pre><code class="language-js">present: (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> func = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">element, state, data</span>) </span>{
+    <span class="hljs-keyword">const</span> end = data.end;
+    element.style.transform =
+      <span class="hljs-string">`translate(<span class="hljs-subst">${state.left - end.left}</span>px, <span class="hljs-subst">${state.top - end.top}</span>px)`</span>;
+  };
+  func.store = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">store, element, data</span>) </span>{
+    store = store || {};
+    <span class="hljs-keyword">const</span> style = store.style = store.style || {};
+    style.transform = element.style.transform;
+    <span class="hljs-keyword">return</span> store;
+  };
+  func.restore = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">element, store, data</span>) </span>{
+    element.style.transform = store.style.transform;
+  };
+  <span class="hljs-keyword">return</span> func;
+}()),
+</code></pre>
+</div><div><h2>Animated State Machine</h2>
+<p>The animation functions are used by an animated state machine. The object tracks the current <code>animation</code> class name of an animated element. When the element is updated to the current <code>animation</code> class name, it updates end, stores the presentation and starts animating and presenting the updated modifiable state. The first animation also copies the <code>end</code> state into the <code>begin</code> and <code>state</code> state. These values, the element being animated and the time <code>t</code> make up the <code>data</code> argument stored by the animated state machine and passed to most of the animation functions.</p>
+<pre><code class="language-js"><span class="hljs-keyword">this</span>.data = {
+  <span class="hljs-attr">animated</span>: {
+    <span class="hljs-attr">root</span>: {
+      <span class="hljs-attr">element</span>: <span class="hljs-comment">// HTMLElement</span>
+    },
+  },
+  <span class="hljs-attr">t</span>: <span class="hljs-comment">// Time in seconds</span>
+  state: <span class="hljs-comment">// The modifiable state</span>
+  begin: <span class="hljs-comment">// The beginning state</span>
+  end: <span class="hljs-comment">// The target end state</span>
+  store: <span class="hljs-comment">// The stored possibly overwritten presentation</span>
+};
+</code></pre>
+<p>With a reference to an <code>AnimatedManager</code> the state machine for an element by its <code>type</code> and <code>id</code>.</p>
+</div><div><h2>React/Preact enter and leave Animations</h2>
+<p>React and Preact integrations support animated elements having a enter and leave <code>animation</code> used when the element enters and leaves the virtual dom.</p>
+<p>These animations normally need <code>animate</code> functions with <code>constant</code> values to help and <code>leave</code> animations need a little CSS to help.</p>
+<p>We can create an example that fades in and out.</p>
+<pre><code class="language-js">enter: {
+  <span class="hljs-attr">update</span>: update.rect().asElement(update.object({
+    <span class="hljs-attr">opacity</span>: animate.constant(<span class="hljs-number">0</span>),
+  })),
+  <span class="hljs-attr">animate</span>: animate.object({
+    <span class="hljs-attr">opacity</span>: animate.constant(<span class="hljs-number">0</span>).to(animate.end()),
+  }),
+  <span class="hljs-attr">present</span>: present.style({
+    <span class="hljs-attr">opacity</span>: present.key(<span class="hljs-string">'opacity'</span>),
+  }),
+},
+</code></pre>
+<pre><code class="language-js">leave: {
+  <span class="hljs-attr">update</span>: update.rect().asElement(update.object({
+    <span class="hljs-attr">opacity</span>: animate.constant(<span class="hljs-number">0</span>),
+  })),
+  <span class="hljs-attr">animate</span>: animate.object({
+    <span class="hljs-attr">opacity</span>: animate.begin().to(animate.constant(<span class="hljs-number">0</span>)),
+  }),
+  <span class="hljs-attr">present</span>: present.style({
+    <span class="hljs-attr">opacity</span>: present.key(<span class="hljs-string">'opacity'</span>),
+  }),
+},
+</code></pre>
+<pre><code class="language-css"><span class="hljs-selector-class">.animatedType</span> <span class="hljs-selector-class">.leave</span> {
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+}
+</code></pre>
+</div></div><script type="text/javascript" src="main.js"></script></body>
 </html>
